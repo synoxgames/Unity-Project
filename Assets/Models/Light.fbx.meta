@@ -1,34 +1,9 @@
 fileFormatVersion: 2
-guid: 7127b4ff873a8604585ccb0db2362658
+guid: ed5feae3290edf546907e81fffd86a61
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Carpet
-    second: {fileID: 2100000, guid: 2a94091f7bb9d9640bc21e3d20a89d66, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: DiningRoom_Floor
-    second: {fileID: 2100000, guid: 79d51d507fdd9b74e991f5bc665ab27b, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Kitchen_Floor
-    second: {fileID: 2100000, guid: 1f6564be64dc1d74d871b59eedc3cdd5, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Walls
-    second: {fileID: 2100000, guid: 501d4ebd92e487541b03c06ccf587fc1, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Wooden_Floor
-    second: {fileID: 2100000, guid: dbe99c1e6f6109e4a9d256f39538eb84, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -72,7 +47,7 @@ ModelImporter:
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
