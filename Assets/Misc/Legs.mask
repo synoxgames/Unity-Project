@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Legs
+  m_Mask: 01000000000000000000000001000000010000000000000000000000000000000000000001000000010000000000000000000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Armature
+    m_Weight: 1
+  - m_Path: Armature/LeftHip
+    m_Weight: 1
+  - m_Path: Armature/LeftHip/LeftThigh
+    m_Weight: 1
+  - m_Path: Armature/LeftHip/LeftThigh/LeftLeg
+    m_Weight: 1
+  - m_Path: Armature/LeftHip/LeftThigh/LeftLeg/LeftLeg.001
+    m_Weight: 1
+  - m_Path: Armature/LeftHip/LeftThigh/LeftLeg/LeftLeg.001/LeftLeg.001_end
+    m_Weight: 1
+  - m_Path: Armature/LowerSpine
+    m_Weight: 1
+  - m_Path: Armature/LowerSpine/MiddleSpine
+    m_Weight: 0
+  - m_Path: Armature/LowerSpine/MiddleSpine/UpperSpine
+    m_Weight: 0
+  - m_Path: Armature/LowerSpine/MiddleSpine/UpperSpine/LeftShoulder
+    m_Weight: 0
+  - m_Path: Armature/LowerSpine/MiddleSpine/UpperSpine/LeftShoulder/LeftForearm
+    m_Weight: 1
+  - m_Path: Armature/LowerSpine/MiddleSpine/UpperSpine/LeftShoulder/LeftForearm/LeftWrist
+    m_Weight: 1
+  - m_Path: Armature/LowerSpine/MiddleSpine/UpperSpine/LeftShoulder/LeftForearm/LeftWrist/LeftHand
+    m_Weight: 1
+  - m_Path: Armature/LowerSpine/MiddleSpine/UpperSpine/LeftShoulder/LeftForearm/LeftWrist/LeftHand/LeftHand_end
+    m_Weight: 1
+  - m_Path: Armature/LowerSpine/MiddleSpine/UpperSpine/Neck
+    m_Weight: 0
+  - m_Path: Armature/LowerSpine/MiddleSpine/UpperSpine/Neck/Head
+    m_Weight: 1
+  - m_Path: Armature/LowerSpine/MiddleSpine/UpperSpine/Neck/Head/Head_end
+    m_Weight: 1
+  - m_Path: Armature/LowerSpine/MiddleSpine/UpperSpine/RightShoulder
+    m_Weight: 0
+  - m_Path: Armature/LowerSpine/MiddleSpine/UpperSpine/RightShoulder/RightForearm
+    m_Weight: 1
+  - m_Path: Armature/LowerSpine/MiddleSpine/UpperSpine/RightShoulder/RightForearm/RightWrist
+    m_Weight: 1
+  - m_Path: Armature/LowerSpine/MiddleSpine/UpperSpine/RightShoulder/RightForearm/RightWrist/RightHand
+    m_Weight: 1
+  - m_Path: Armature/LowerSpine/MiddleSpine/UpperSpine/RightShoulder/RightForearm/RightWrist/RightHand/RightHand_end
+    m_Weight: 1
+  - m_Path: Armature/RightHip
+    m_Weight: 1
+  - m_Path: Armature/RightHip/RightTigh
+    m_Weight: 1
+  - m_Path: Armature/RightHip/RightTigh/RightLeg
+    m_Weight: 1
+  - m_Path: Armature/RightHip/RightTigh/RightLeg/RightLeg.001
+    m_Weight: 1
+  - m_Path: Armature/RightHip/RightTigh/RightLeg/RightLeg.001/RightLeg.001_end
+    m_Weight: 1
+  - m_Path: Icosphere
+    m_Weight: 1
+  - m_Path: Icosphere.001
+    m_Weight: 1
+  - m_Path: Icosphere.002
+    m_Weight: 1
