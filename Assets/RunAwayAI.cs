@@ -14,8 +14,15 @@ public class RunAwayAI : MonoBehaviour
     private float stuckTimer = 0f;
     private bool isFleeing = false;
 
+    [Header("Audio")]
+    public AudioClip[] tauntSounds;
+    public float audioCooldown = 1.5f;
+    private AudioSource audPlayer;
+    float audioTimer = 0.0f;
+
     void Start()
     {
+        audPlayer = GetComponent<AudioSource>();
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
@@ -43,6 +50,8 @@ public class RunAwayAI : MonoBehaviour
             Vector3 target = transform.position + dir.normalized * 4f;
             if (NavMesh.SamplePosition(target, out var hit, 2f, NavMesh.AllAreas))
             {
+                if (Time.time > audioTimer) PlayRandomSound();
+
                 agent.SetDestination(hit.position);
             }
         }
@@ -92,5 +101,12 @@ public class RunAwayAI : MonoBehaviour
         {
             agent.Warp(warpHit.position);
         }
+    }
+
+    private void PlayRandomSound() {
+        if (audPlayer.isPlaying) return;
+        AudioClip clip = tauntSounds[Random.Range(0, tauntSounds.Length)];
+        audPlayer.PlayOneShot(clip);
+        audioTimer = Time.time + audioCooldown;
     }
 }

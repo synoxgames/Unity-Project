@@ -391,8 +391,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.8507495, y: 0.030000001, z: 1.8456937}
-  m_Center: {x: -1.4827579, y: 0, z: 1.8309045}
+  m_Size: {x: 2.8507495, y: 0.030000001, z: 1.8963299}
+  m_Center: {x: -1.4827578, y: 0, z: 1.8055887}
 --- !u!65 &104707808
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -833,6 +833,7 @@ GameObject:
   - component: {fileID: 448344025}
   - component: {fileID: 448344026}
   - component: {fileID: 448344027}
+  - component: {fileID: 448344028}
   m_Layer: 0
   m_Name: Dragon
   m_TagString: Untagged
@@ -983,6 +984,18 @@ MonoBehaviour:
   maxSpeed: 6
   speedScale: 2
   fleeDistance: 5
+  tauntSounds:
+  - {fileID: 8300000, guid: 8eeb4056219acdc4c98a003d053d81f0, type: 3}
+  - {fileID: 8300000, guid: e89e504766ddbe04ea123f73aeeae43f, type: 3}
+  - {fileID: 8300000, guid: 31f8757618b397249a6aa510e3232819, type: 3}
+  - {fileID: 8300000, guid: c395521530e4da64f9fbf534b32ba038, type: 3}
+  - {fileID: 8300000, guid: 51011c97f325d904bafe0a8ad932547e, type: 3}
+  - {fileID: 8300000, guid: a1eb60a6d035ce1439d9b76f1170b2e4, type: 3}
+  - {fileID: 8300000, guid: f9e32dd65c12c234fa0fe7d0c9d86781, type: 3}
+  - {fileID: 8300000, guid: 3ebe0f8b4e9351d4db9620f02275079f, type: 3}
+  - {fileID: 8300000, guid: b2df81b96e5966d43ad5aa737be5ba70, type: 3}
+  - {fileID: 8300000, guid: eddd9fc42bca39e4a966bdfd570c2625, type: 3}
+  audioCooldown: 1.5
 --- !u!195 &448344027
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1005,6 +1018,102 @@ NavMeshAgent:
   m_BaseOffset: 1.36
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!82 &448344028
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448344021}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 8.12
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!4 &631456464 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2230948136704101863, guid: 1affc74e7ca189c4dbd6da32199e73c7, type: 3}
@@ -1341,8 +1450,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.6152563, y: 0.030000001, z: 1.1983559}
-  m_Center: {x: 3.2899055, y: 0, z: 2.1420393}
+  m_Size: {x: 1.6152564, y: 0.030000001, z: 1.2276633}
+  m_Center: {x: 3.2899055, y: 0, z: 2.1273885}
 --- !u!65 &1032032715
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1354,8 +1463,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.7478884, y: 0.030000001, z: 3.8025863}
-  m_Center: {x: -1.9607673, y: 0, z: -1.0409166}
+  m_Size: {x: 1.7990751, y: 0.030000001, z: 3.8025866}
+  m_Center: {x: -1.9351795, y: 0, z: -1.0409167}
 --- !u!1 &1077483026
 GameObject:
   m_ObjectHideFlags: 0
@@ -1404,7 +1513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -2051,7 +2160,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -83.42}
+  m_AnchoredPosition: {x: 0, y: -56.74}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1432361210
