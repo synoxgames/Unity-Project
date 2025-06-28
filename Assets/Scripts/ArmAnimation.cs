@@ -11,13 +11,16 @@ public class ArmAnimation : MonoBehaviour
     public KeyCode injectKey = KeyCode.Mouse0;
     public AudioSource audioSource;
     public AudioClip[] punchSounds;
+    public LevelManager levelManager;
     private bool isInjecting = false;
 
     void Update()
     {
-        if (!isInjecting && Input.GetKeyDown(injectKey))
+        if (!isInjecting && Input.GetKeyDown(injectKey) && levelManager.smackCount > 0)
         {
             StartCoroutine(Inject());
+            levelManager.smackCount--; // Decrease smack count
+            levelManager.smackCountText.text = "X " + levelManager.smackCount.ToString(); // Update UI text
         }
     }
 
@@ -30,5 +33,6 @@ public class ArmAnimation : MonoBehaviour
         yield return new WaitForSeconds(injectDuration);
         armImage.sprite = idleSprite;
         isInjecting = false;
+        levelManager.UpdateSmackLevel(20f); // Increase smack level by 10
     }
 }

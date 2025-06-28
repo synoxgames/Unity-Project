@@ -54,7 +54,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Update()
     {
-        if (canMove) {
+        if (canMove)
+        {
             isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
             if (isGrounded && velocity.y < 0)
@@ -86,14 +87,17 @@ public class PlayerMovement : MonoBehaviour
             else if (!isSprinting && sprintDuration > 0)
                 sprintDuration -= Time.deltaTime;
 
-            if (reachedRechargeFailSafe) {
-                if (Input.GetButtonUp("Sprint")) {
+            if (reachedRechargeFailSafe)
+            {
+                if (Input.GetButtonUp("Sprint"))
+                {
                     reachedRechargeFailSafe = false;
                     reachedMaxSprint = true;
                 }
             }
 
-            if (reachedMaxSprint && sprintDuration <= 0) {
+            if (reachedMaxSprint && sprintDuration <= 0)
+            {
 
                 if (!Input.GetButton("Sprint"))
                     reachedMaxSprint = false;
@@ -102,29 +106,36 @@ public class PlayerMovement : MonoBehaviour
 
             }
 
-            if (!reachedMaxSprint && sprintDuration >= sprintMax) {
+            if (!reachedMaxSprint && sprintDuration >= sprintMax)
+            {
                 reachedMaxSprint = true;
                 Sprint(false);
             }
 
-            if (isWalking) {
+            if (isWalking)
+            {
                 CheckGround();
 
-                if (tempSurface != currentSurfaceType) {
+                if (tempSurface != currentSurfaceType)
+                {
                     FindWalkingClips(tempSurface);
                     currentSurfaceType = tempSurface;
                 }
 
-                if (isGrounded && Time.time > nextWalk) {
+                if (isGrounded && Time.time > nextWalk)
+                {
                     PlaySounds();
                 }
             }
 
-            if (isSprinting && changedSpeed == false && isWalking) {
+            if (isSprinting && changedSpeed == false && isWalking)
+            {
                 anim.speed *= 2f;
                 changedSpeed = true;
             }
-        } else {
+        }
+        else
+        {
             anim.SetBool("isWalking", false);
         }
 
@@ -139,8 +150,9 @@ public class PlayerMovement : MonoBehaviour
         {
             moveSpeed = moveSpeed * sprintInrease;
             stepInterval /= sprintInrease;
-            
-            if (isWalking) {
+
+            if (isWalking)
+            {
                 anim.speed *= 2f;
                 changedSpeed = true;
             }
@@ -150,7 +162,8 @@ public class PlayerMovement : MonoBehaviour
             moveSpeed = moveSpeed / sprintInrease;
             stepInterval *= sprintInrease;
 
-            if (changedSpeed) {
+            if (changedSpeed)
+            {
                 anim.speed /= 2f;
                 changedSpeed = false;
             }
@@ -164,7 +177,7 @@ public class PlayerMovement : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(groundCheck.position, -groundCheck.up, out hit, groundMask))
             {
-               if (hit.transform.GetComponent<Ground>())
+                if (hit.transform.GetComponent<Ground>())
                 {
                     if (hit.transform.GetComponent<Ground>().type != tempSurface)
                     {
@@ -196,7 +209,8 @@ public class PlayerMovement : MonoBehaviour
         if (newClip == previousStep)
         {
             PlaySounds();
-        } else
+        }
+        else
         {
             previousStep = newClip;
             aud.PlayOneShot(newClip);
@@ -204,8 +218,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void PickupFlashlight() {
-        if (hasLight) {
+    public void PickupFlashlight()
+    {
+        if (hasLight)
+        {
             Debug.Log("Player Already Has Flashlight");
             PopupText.SetColour(Color.yellow);
             PopupText.SetText("Your one will do fine.");
@@ -215,8 +231,26 @@ public class PlayerMovement : MonoBehaviour
 
         hasLight = true;
         GameObject.FindWithTag("Flashlight").SetActive(true);
-        
+
     }
+
+    // Attach to player
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        Rigidbody body = hit.collider.attachedRigidbody;
+
+        if (body == null || body.isKinematic)
+            return;
+
+        // Ignore if pushing from below
+        if (hit.moveDirection.y < -0.3f)
+            return;
+
+        // Apply push force
+        Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+        body.velocity = pushDir * 3f; // tweak speed
+    }
+
 }
 
 public enum SurfaceType
