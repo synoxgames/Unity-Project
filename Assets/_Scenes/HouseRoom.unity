@@ -3975,7 +3975,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1370296330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4350,7 +4350,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1432361208}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 945dc6a55c56c5e499e996f01019f3b1, type: 3}
+  m_Script: {fileID: 11500000, guid: 19a900ea607f19a41b4c920d42129c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   armImage: {fileID: 1432361211}
@@ -4368,6 +4368,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3a0358b312fa0dc46a16abbd490456c3, type: 3}
   - {fileID: 8300000, guid: 9d2b821c79b3e224aab48d43c2cd8e9a, type: 3}
   levelManager: {fileID: 1676047349}
+  cameraShake: {fileID: 1669209995}
 --- !u!114 &1432361211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5435,6 +5436,22 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &1669209995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669209989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbaa8b6b09f3d5a419a16f706d56d9e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameCamera: {fileID: 1669209989}
+  shakeDuration: 0.1
+  shakeMagnitude: 0.3
+  debug: 0
 --- !u!1 &1676047348
 GameObject:
   m_ObjectHideFlags: 0

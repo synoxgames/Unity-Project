@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class ArmAnimation : MonoBehaviour
+public class ArmManager : MonoBehaviour
 {
     public Image armImage;
     public Sprite idleSprite;
@@ -13,6 +13,7 @@ public class ArmAnimation : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip[] punchSounds;
     public LevelManager levelManager;
+    public CameraShake cameraShake;
     private bool isInjecting = false;
     private bool grabbing = false;
 
@@ -30,6 +31,7 @@ public class ArmAnimation : MonoBehaviour
     {
         AudioClip clip = punchSounds[Random.Range(0, punchSounds.Length)];
         audioSource.PlayOneShot(clip);
+        StartCoroutine(cameraShake.Shake());
         isInjecting = true;
         armImage.sprite = injectSprite;
         yield return new WaitForSeconds(injectDuration);

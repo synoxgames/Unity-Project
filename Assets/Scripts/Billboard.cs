@@ -28,6 +28,9 @@ public class Billboard : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        if (camera == null)
+            return;
+
         switch (billboardType)
         {
             case BillboardType.LookAtCamera:
