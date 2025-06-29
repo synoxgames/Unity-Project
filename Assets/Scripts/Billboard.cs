@@ -5,7 +5,7 @@ using UnityEngine;
 public class Billboard : MonoBehaviour
 {
     [SerializeField] private BillboardType billboardType;
-    public Transform camera;
+    [SerializeField] public Transform camera;
 
     [Header("Lock Rotation")]
     [SerializeField] private bool lockX;
@@ -18,6 +18,11 @@ public class Billboard : MonoBehaviour
     void Awake()
     {
         originalRotation = transform.rotation.eulerAngles;
+// if camera hasnt been assigned, search for player camera
+        if (camera == null)
+        {
+            camera = GameObject.Find("Camera")?.transform;
+        }
     }
 
     // Update is called once per frame
