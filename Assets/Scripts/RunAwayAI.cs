@@ -46,7 +46,7 @@ public class RunAwayAI : MonoBehaviour
         if (isFleeing)
         {
             // Output object is fleeing
-            Debug.Log("Sprite is fleeing from player!");
+            // Debug.Log("Sprite is fleeing from player!");
             Vector3 target = transform.position + dir.normalized * 4f;
             if (NavMesh.SamplePosition(target, out var hit, 2f, NavMesh.AllAreas))
             {
