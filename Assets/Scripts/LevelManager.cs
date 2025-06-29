@@ -95,7 +95,7 @@ public class LevelManager : MonoBehaviour
 
     public void UpdateSmackLevel(float value)
     {
-        // TODO: have this gradually change from yellow (low - withdrawal gameover) to red (high - overdose gameover)
+        // Did it for you baby xx
         currentSmackLevel += value;
         currentSmackLevel = Mathf.Clamp(currentSmackLevel, 0f, maxSmackLevel);
         smackSlider.value = currentSmackLevel;
