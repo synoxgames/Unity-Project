@@ -39,7 +39,7 @@ public class ObjectGrabbable : MonoBehaviour
         // objectRigidbody.constraints = RigidbodyConstraints.None;
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         if (objectGrabPointTransform != null)
         {
