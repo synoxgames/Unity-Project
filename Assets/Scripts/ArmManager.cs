@@ -31,7 +31,7 @@ public class ArmManager : MonoBehaviour
     {
         AudioClip clip = punchSounds[Random.Range(0, punchSounds.Length)];
         audioSource.PlayOneShot(clip);
-        StartCoroutine(cameraShake.Shake());
+        cameraShake.ShakeCamera();
         isInjecting = true;
         armImage.sprite = injectSprite;
         yield return new WaitForSeconds(injectDuration);

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
+using UnityEngine.UI;
 using Vector3 = UnityEngine.Vector3;
 
 /**
@@ -18,6 +19,11 @@ public class CameraShake : MonoBehaviour
     public float shakeMagnitude = 0.4f;
     private bool isShaking = false;
     private Vector3 originalPos;
+
+    // ----- Blood Effect Variables -----
+    public Image bloodEffectImage;
+    public float bloodDuration = 0.5f;
+
 
     // ----- Debugging -----
     public bool debug = false;
@@ -101,6 +107,21 @@ public class CameraShake : MonoBehaviour
     public void ShakeCamera()
     {
         StartCoroutine(Shake());
+        StartCoroutine(FadeBloodEffect());
+    }
+
+    // This method will increase blood effect alpha to max, then fade it out over the specified duration
+    public IEnumerator FadeBloodEffect()
+    {
+        bloodEffectImage.color = new Color(bloodEffectImage.color.r, bloodEffectImage.color.g, bloodEffectImage.color.b, 1f);
+        float elapsed = 0f;
+        while (elapsed < bloodDuration)
+        {
+            float alpha = Mathf.Lerp(1f, 0f, elapsed / bloodDuration);
+            bloodEffectImage.color = new Color(bloodEffectImage.color.r, bloodEffectImage.color.g, bloodEffectImage.color.b, alpha);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
     }
 }
 
