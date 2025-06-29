@@ -7,16 +7,18 @@ public class ArmAnimation : MonoBehaviour
     public Image armImage;
     public Sprite idleSprite;
     public Sprite injectSprite;
+    public Sprite grabSprite;
     public float injectDuration = 1.5f;
     public KeyCode injectKey = KeyCode.Mouse0;
     public AudioSource audioSource;
     public AudioClip[] punchSounds;
     public LevelManager levelManager;
     private bool isInjecting = false;
+    private bool grabbing = false;
 
     void Update()
     {
-        if (!isInjecting && Input.GetKeyDown(injectKey) && levelManager.smackCount > 0)
+        if (!isInjecting && Input.GetKeyDown(injectKey) && levelManager.smackCount > 0 && !grabbing)
         {
             StartCoroutine(Inject());
             levelManager.smackCount--; // Decrease smack count
@@ -34,5 +36,18 @@ public class ArmAnimation : MonoBehaviour
         armImage.sprite = idleSprite;
         isInjecting = false;
         levelManager.UpdateSmackLevel(20f); // Increase smack level by 10
+    }
+
+    public void SetGrabbing(bool isGrabbing)
+    {
+        grabbing = isGrabbing;
+        if (grabbing)
+        {
+            armImage.sprite = grabSprite;
+        }
+        else
+        {
+            armImage.sprite = idleSprite;
+        }
     }
 }

@@ -4095,6 +4095,7 @@ MonoBehaviour:
   armImage: {fileID: 1432361211}
   idleSprite: {fileID: 21300000, guid: a9c0412c2e0f64f468eec2491a72560d, type: 3}
   injectSprite: {fileID: 21300000, guid: da18c9d8479b7804b81169e18a732ba9, type: 3}
+  grabSprite: {fileID: 21300000, guid: cb51d74361a29734094c4d5c2acbfbb7, type: 3}
   injectDuration: 1
   injectKey: 323
   audioSource: {fileID: 37950543}
@@ -4268,6 +4269,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -6086354559900192592, guid: acea737c867c7c147b76b91e3fd486c2, type: 3}
+      propertyPath: armAnimation
+      value: 
+      objectReference: {fileID: 1432361210}
+    - target: {fileID: -6086354559900192592, guid: acea737c867c7c147b76b91e3fd486c2, type: 3}
       propertyPath: playerCameraTransform
       value: 
       objectReference: {fileID: 1669209990}
@@ -4402,6 +4407,10 @@ PrefabInstance:
     - target: {fileID: 1928032793962234283, guid: acea737c867c7c147b76b91e3fd486c2, type: 3}
       propertyPath: m_CastShadows
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2403501703487195246, guid: acea737c867c7c147b76b91e3fd486c2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 2546509224101711119, guid: acea737c867c7c147b76b91e3fd486c2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6121,6 +6130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1848309784}
     m_Modifications:
+    - target: {fileID: 3811911217802938768, guid: 2941d9ed88967a8458f8aaf450c4a45d, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3811911217802938772, guid: 2941d9ed88967a8458f8aaf450c4a45d, type: 3}
       propertyPath: m_RootOrder
       value: 0

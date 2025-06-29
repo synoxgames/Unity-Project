@@ -7,6 +7,7 @@ public class PlayerPickUpDrop : MonoBehaviour
     [SerializeField] private Transform playerCameraTransform;
 
     [SerializeField] private Transform objectGrabPointTransform;
+    [SerializeField] public ArmAnimation armAnimation;
     [SerializeField] public bool debug = false;
     private ObjectGrabbable objectGrabbable;
 
@@ -26,6 +27,7 @@ public class PlayerPickUpDrop : MonoBehaviour
                     {
                         if (debug) Debug.Log("Picked up object: " + raycastHit.transform.name);
                         objectGrabbable.Grab(objectGrabPointTransform);
+                        armAnimation.SetGrabbing(true);
                     }
                 }
             }
@@ -35,6 +37,7 @@ public class PlayerPickUpDrop : MonoBehaviour
                 if (debug) Debug.Log("Dropped object: " + objectGrabbable.gameObject.name);
                 objectGrabbable.Drop();
                 objectGrabbable = null;
+                armAnimation.SetGrabbing(false);
             }
         }
     }
