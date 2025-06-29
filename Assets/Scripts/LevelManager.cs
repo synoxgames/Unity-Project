@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Rendering.PostProcessing;
 public class LevelManager : MonoBehaviour
 {
     [Header("Smack Level Settings")]
@@ -13,6 +14,8 @@ public class LevelManager : MonoBehaviour
     private float currentSmackLevel = 0f;
     public int smackCount = 0; // Count of smack injections
     public TextMeshProUGUI smackCountText;
+    public Gradient colourGradient;
+    public Image smackFillSprite;
 
     [Header("Suspicion Level Settings")]
     [SerializeField] private Slider suspicionSlider;
@@ -28,6 +31,9 @@ public class LevelManager : MonoBehaviour
     [Header("UI Elements")]
     [SerializeField] private GameObject debugUI; // UI element to show debug controls
     public bool debug = false;
+
+    [Header("Other")]
+    public PostProcessVolume postProcessVol;
 
     // Start is called before the first frame update
     void Start()
@@ -93,6 +99,9 @@ public class LevelManager : MonoBehaviour
         currentSmackLevel += value;
         currentSmackLevel = Mathf.Clamp(currentSmackLevel, 0f, maxSmackLevel);
         smackSlider.value = currentSmackLevel;
+        smackFillSprite.color = colourGradient.Evaluate(currentSmackLevel / maxSmackLevel);
+        postProcessVol.weight = currentSmackLevel / maxSmackLevel;
+
 
         if (debug) Debug.Log("Smack Level: " + currentSmackLevel);
 
