@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     CharacterController controller;
     bool isGrounded;
     Vector3 velocity;
-    Animator anim;
+    //Animator anim;
     AudioSource aud;
     List<AudioClip> walkingClips = new List<AudioClip>();
     SurfaceType tempSurface = SurfaceType.Wood;
@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
-        anim = GetComponentInChildren<Animator>();
+        //anim = GetComponentInChildren<Animator>();
         aud = GetComponent<AudioSource>();
         FindWalkingClips(tempSurface);
     }
@@ -75,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
             velocity.y += gravity * Time.deltaTime;
             controller.Move(velocity * Time.deltaTime);
 
-            anim.SetBool("isWalking", isWalking);
+            //anim.SetBool("isWalking", isWalking);
 
             if (Input.GetButtonDown("Sprint") && !reachedMaxSprint)
                 Sprint(true);
@@ -130,16 +130,16 @@ public class PlayerMovement : MonoBehaviour
 
             if (isSprinting && changedSpeed == false && isWalking)
             {
-                anim.speed *= 2f;
+                //anim.speed *= 2f;
                 changedSpeed = true;
             }
         }
         else
         {
-            anim.SetBool("isWalking", false);
+            //anim.SetBool("isWalking", false);
         }
 
-        anim.SetBool("hasLight", hasLight);
+        //anim.SetBool("hasLight", hasLight);
     }
 
     public void Sprint(bool state)
@@ -153,7 +153,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (isWalking)
             {
-                anim.speed *= 2f;
+                //anim.speed *= 2f;
                 changedSpeed = true;
             }
         }
@@ -164,7 +164,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (changedSpeed)
             {
-                anim.speed /= 2f;
+                //anim.speed /= 2f;
                 changedSpeed = false;
             }
         }
