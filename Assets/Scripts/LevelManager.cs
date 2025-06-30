@@ -33,6 +33,7 @@ public class LevelManager : MonoBehaviour
     public bool debug = false;
 
     [Header("Other")]
+    public GameObject hallucinationsHolder;
     public PostProcessVolume postProcessVol;
 
     // Start is called before the first frame update
@@ -95,18 +96,26 @@ public class LevelManager : MonoBehaviour
 
     public void UpdateSmackLevel(float value)
     {
-        // Did it for you baby xx
         currentSmackLevel += value;
         currentSmackLevel = Mathf.Clamp(currentSmackLevel, 0f, maxSmackLevel);
         smackSlider.value = currentSmackLevel;
+
         smackFillSprite.color = colourGradient.Evaluate(currentSmackLevel / maxSmackLevel);
         postProcessVol.weight = currentSmackLevel / maxSmackLevel;
 
 
+        if ((currentSmackLevel / maxSmackLevel) <= 0.25f) {
+            if (!hallucinationsHolder.activeSelf) 
+                hallucinationsHolder.SetActive(true);
+        } else {
+            if (hallucinationsHolder.activeSelf) 
+                hallucinationsHolder.SetActive(false);
+        }
+
         if (debug) Debug.Log("Smack Level: " + currentSmackLevel);
 
         //Game Over Logic
-        if (currentSmackLevel >= maxSmackLevel)
+        if (currentSmackLevel > maxSmackLevel)
         {
             Debug.Log("Too much smack, overdose! Suck shit, you lose!");
             //TODO: Implement game over logic here
