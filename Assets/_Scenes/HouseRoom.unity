@@ -123,6 +123,82 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 924efa846f309cb41b092a279ebdcd29, type: 2}
+--- !u!1 &3562024
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3562027}
+  - component: {fileID: 3562026}
+  - component: {fileID: 3562025}
+  m_Layer: 5
+  m_Name: BlackScreen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &3562025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3562024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &3562026
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3562024}
+  m_CullTransparentMesh: 1
+--- !u!224 &3562027
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3562024}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1077483030}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &18663535
 GameObject:
   m_ObjectHideFlags: 0
@@ -8534,6 +8610,7 @@ RectTransform:
   - {fileID: 167165243}
   - {fileID: 786615357}
   - {fileID: 2125191298}
+  - {fileID: 3562027}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15336,6 +15413,7 @@ MonoBehaviour:
   idleSprite: {fileID: 21300000, guid: a9c0412c2e0f64f468eec2491a72560d, type: 3}
   injectSprite: {fileID: 21300000, guid: da18c9d8479b7804b81169e18a732ba9, type: 3}
   grabSprite: {fileID: 21300000, guid: cb51d74361a29734094c4d5c2acbfbb7, type: 3}
+  kysSprite: {fileID: 21300000, guid: 867e5b6d31fd5584193217191e258340, type: 3}
   injectDuration: 1
   injectKey: 323
   audioSource: {fileID: 37950543}
@@ -15346,6 +15424,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 80cf9c4421a27f24e8989898ba436551, type: 3}
   - {fileID: 8300000, guid: 3a0358b312fa0dc46a16abbd490456c3, type: 3}
   - {fileID: 8300000, guid: 9d2b821c79b3e224aab48d43c2cd8e9a, type: 3}
+  bangSound: {fileID: 8300000, guid: 4f7fbda95f522f64d96057c53f15c0ce, type: 3}
   levelManager: {fileID: 1676047349}
   cameraShake: {fileID: 1669209995}
 --- !u!114 &1432361211
@@ -16601,6 +16680,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1676047350}
   - component: {fileID: 1676047349}
+  - component: {fileID: 1676047351}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -16663,6 +16743,7 @@ MonoBehaviour:
   moneyText: {fileID: 379917428}
   smackText: {fileID: 167165244}
   debugUI: {fileID: 1370296329}
+  blackScreen: {fileID: 3562025}
   debug: 0
   hallucinationsHolder: {fileID: 576087788}
   postProcessVol: {fileID: 1191076441}
@@ -16681,6 +16762,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1676047351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676047348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa2d41d43863a4449d1429485d86a39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputTimeout: 3
+  armManager: {fileID: 1432361210}
 --- !u!1 &1695629453
 GameObject:
   m_ObjectHideFlags: 0
