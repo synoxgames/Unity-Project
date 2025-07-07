@@ -4,14 +4,20 @@ using System.Collections;
 
 public class ArmManager : MonoBehaviour
 {
+    [Header("Arm Sprites")]
     public Image armImage;
     public Sprite idleSprite;
     public Sprite injectSprite;
     public Sprite grabSprite;
+    public Sprite kysSprite;
+    [Header("Injection Settings")]
     public float injectDuration = 1.5f;
     public KeyCode injectKey = KeyCode.Mouse0;
+    [Header("Audio Settings")]
     public AudioSource audioSource;
     public AudioClip[] punchSounds;
+    public AudioClip bangSound;
+    [Header("Script References")]
     public LevelManager levelManager;
     public CameraShake cameraShake;
     private bool isInjecting = false;
@@ -51,5 +57,23 @@ public class ArmManager : MonoBehaviour
         {
             armImage.sprite = idleSprite;
         }
+    }
+
+    public void KYS()
+    {
+        // sets arm sprite to kys, waits 2 seconds and shakes the image, plays a bang sound, screen goes black, scene resets
+        armImage.sprite = kysSprite;
+        StartCoroutine(KYSCoroutine());
+    }
+    
+    private IEnumerator KYSCoroutine()
+    {
+        cameraShake.Shaking(true);
+        yield return new WaitForSeconds(1f);
+        audioSource.PlayOneShot(bangSound);
+        cameraShake.Shaking(false);
+        yield return new WaitForSeconds(1f);
+        // Reset the scene or perform any other action needed after KYS
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 }
