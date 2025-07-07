@@ -65,15 +65,19 @@ public class ArmManager : MonoBehaviour
         armImage.sprite = kysSprite;
         StartCoroutine(KYSCoroutine());
     }
-    
+
     private IEnumerator KYSCoroutine()
     {
         cameraShake.Shaking(true);
         yield return new WaitForSeconds(1f);
         audioSource.PlayOneShot(bangSound);
         cameraShake.Shaking(false);
+        levelManager.blackScreen.gameObject.SetActive(true); // Ensure black screen is active
+        levelManager.blackScreen.color = new Color(0, 0, 0, 1f); // Set black screen to opaque
+        
         yield return new WaitForSeconds(1f);
         // Reset the scene or perform any other action needed after KYS
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        StartCoroutine(levelManager.FadeOut()); // Fade in after reset
     }
 }

@@ -30,6 +30,7 @@ public class LevelManager : MonoBehaviour
 
     [Header("UI Elements")]
     [SerializeField] private GameObject debugUI; // UI element to show debug controls
+    public Image blackScreen;
     public bool debug = false;
 
     [Header("Other")]
@@ -39,13 +40,15 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        blackScreen.gameObject.SetActive(true);
+        StartCoroutine(FadeIn()); // Start fade-in effect
         currentSmackLevel = startSmackLevel;
         smackSlider.value = startSmackLevel;
         smackCount = 0; // Reset smack count at the start
         smackCountText = GameObject.Find("SmackCountText").GetComponent<TextMeshProUGUI>();
         currentSuspicionLevel = 0f;
         suspicionSlider.value = 0f;
-        moneyText.text = "Money: $" + money.ToString();
+        moneyText.text = "Broke Ass";
         smackText.enabled = false; // Hide smack text initially
         debugUI.SetActive(debug); // Set initial state of debug UI
     }
@@ -89,8 +92,8 @@ public class LevelManager : MonoBehaviour
         //Game Over Logic
         if (currentSuspicionLevel >= maxSuspicionLevel)
         {
-            Debug.Log("Too sussy baka uwu! Suck shit, you lose!");
-            //TODO: Implement game over logic here
+            if (debug) Debug.Log("Too sussy baka uwu! Suck shit, you lose!");
+            // TODO: Implement game over logic here
         }
     }
 
@@ -104,11 +107,14 @@ public class LevelManager : MonoBehaviour
         postProcessVol.weight = currentSmackLevel / maxSmackLevel;
 
 
-        if ((currentSmackLevel / maxSmackLevel) <= 0.25f) {
-            if (!hallucinationsHolder.activeSelf) 
+        if ((currentSmackLevel / maxSmackLevel) <= 0.25f)
+        {
+            if (!hallucinationsHolder.activeSelf)
                 hallucinationsHolder.SetActive(true);
-        } else {
-            if (hallucinationsHolder.activeSelf) 
+        }
+        else
+        {
+            if (hallucinationsHolder.activeSelf)
                 hallucinationsHolder.SetActive(false);
         }
 
@@ -117,12 +123,12 @@ public class LevelManager : MonoBehaviour
         //Game Over Logic
         if (currentSmackLevel > maxSmackLevel)
         {
-            Debug.Log("Too much smack, overdose! Suck shit, you lose!");
+            if (debug) Debug.Log("Too much smack, overdose! Suck shit, you lose!");
             //TODO: Implement game over logic here
         }
         else if (currentSmackLevel <= 0f)
         {
-            Debug.Log("Withdrawal symptoms detected! Suck shit, you lose!");
+            if (debug) Debug.Log("Withdrawal symptoms detected! Suck shit, you lose!");
             //TODO: Implement game over logic here
         }
     }
@@ -155,5 +161,55 @@ public class LevelManager : MonoBehaviour
     public void SpawnFurniture()
     {
         //TODO: Implement furniture spawning logic, should be randomly placed in set locations
+    }
+    
+     // This coroutine is called at the start of the game to fade in from black.
+    public IEnumerator FadeIn()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        float elapsedTime = 0f;
+        float fadeTime = 2f;
+
+        while (elapsedTime < fadeTime)
+        {
+            elapsedTime += Time.deltaTime;
+            float progress = elapsedTime / fadeTime;
+            float easedAlpha = 1 - (progress * progress); // Quadratic ease-out
+
+            blackScreen.color = new Color(0, 0, 0, easedAlpha);
+            yield return null;
+        }
+
+        // Ensure alpha is exactly 0 at the end
+        blackScreen.color = new Color(0, 0, 0, 0);
+    }
+
+    // This coroutine is called at the end of the game to fade out to black.
+    public IEnumerator FadeOut()
+    {
+        // ensure black screen object is active
+        if (!blackScreen.gameObject.activeSelf)
+        {
+            // Make sure black screen is clear 
+            blackScreen.color = new Color(0, 0, 0, 0);
+            blackScreen.gameObject.SetActive(true);
+        }
+
+        float elapsedTime = 0f;
+        float fadeTime = 2f;
+
+        while (elapsedTime < fadeTime)
+        {
+            elapsedTime += Time.deltaTime;
+            float progress = elapsedTime / fadeTime;
+            float easedAlpha = progress * progress; // Quadratic ease-in
+
+            blackScreen.color = new Color(0, 0, 0, easedAlpha);
+            yield return null;
+        }
+
+        // Ensure alpha is exactly 1 at the end
+        blackScreen.color = new Color(0, 0, 0, 1);
     }
 }
