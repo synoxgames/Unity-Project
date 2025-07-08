@@ -11,34 +11,46 @@ public class PlayerPickUpDrop : MonoBehaviour
     [SerializeField] public bool debug = false;
     private ObjectGrabbable objectGrabbable;
 
+    public static PlayerPickUpDrop instance;
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (objectGrabbable == null)
-            {
+    private void Awake() {
+        // Creating a cheeky singleton
+        if (instance != this) Destroy(instance);
+        instance = this;
+    }
+
+
+    void Update() {
+        if (Input.GetKeyDown(KeyCode.E)) {
+            if (objectGrabbable == null) {
                 // carrying fuck all, try n grab
-                float pickUpDistance = 3f;
-                if (Physics.Raycast(playerCameraTransform.position, playerCameraTransform.forward, out RaycastHit raycastHit, pickUpDistance))
-                {
-                    if (debug) Debug.Log("Raycast hit: " + raycastHit.transform.name);
-                    if (raycastHit.transform.TryGetComponent(out objectGrabbable))
-                    {
-                        if (debug) Debug.Log("Picked up object: " + raycastHit.transform.name);
-                        objectGrabbable.Grab(objectGrabPointTransform);
-                        armManager.SetGrabbing(true);
-                    }
-                }
-            }
-            else
-            {
+                PickupObject();
+            } else {
                 // currently raxing shit, try n drop
-                if (debug) Debug.Log("Dropped object: " + objectGrabbable.gameObject.name);
-                objectGrabbable.Drop();
-                objectGrabbable = null;
-                armManager.SetGrabbing(false);
+                DropObject();
             }
         }
+    }
+
+    public void PickupObject() {
+        float pickUpDistance = 3f;
+        if (Physics.Raycast(playerCameraTransform.position, playerCameraTransform.forward, out RaycastHit raycastHit, pickUpDistance)) {
+            if (debug) Debug.Log("Raycast hit: " + raycastHit.transform.name);
+            if (raycastHit.transform.TryGetComponent(out objectGrabbable)) {
+                if (debug) Debug.Log("Picked up object: " + raycastHit.transform.name);
+                objectGrabbable.Grab(objectGrabPointTransform);
+                armManager.SetGrabbing(true);
+            }
+        }
+    }
+
+
+    public void DropObject() {
+        if (objectGrabbable == null) return;
+
+        if (debug) Debug.Log("Dropped object: " + objectGrabbable.gameObject.name);
+        objectGrabbable.Drop();
+        objectGrabbable = null;
+        armManager.SetGrabbing(false);
     }
 }

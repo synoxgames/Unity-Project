@@ -11,10 +11,13 @@ public class SellZone : MonoBehaviour
         if (other.CompareTag("Furniture"))
         {
             FurnitureValue fv = other.GetComponent<FurnitureValue>();
+
             if (fv != null)
             {
                 levelManager.UpdateMoney(fv.moneyValue);
                 levelManager.UpdateSuspicionLevel(fv.suspicionValue);
+
+                PlayerPickUpDrop.instance.DropObject();
 
                 Destroy(other.gameObject); // or setInactive if you want effects later
             }
