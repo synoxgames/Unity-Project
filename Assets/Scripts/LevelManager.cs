@@ -33,6 +33,12 @@ public class LevelManager : MonoBehaviour
     public Image blackScreen;
     public bool debug = false;
 
+    [Header("UI Elements - Warnings")]
+    public GameObject withdrawlText;
+    public float withdrawlThreshold = 0.1f;
+    public float withdrawlBlinkSpeed = 1f;
+    float wBT = 0.0f;
+
     [Header("Other")]
     public GameObject hallucinationsHolder;
     public PostProcessVolume postProcessVol;
@@ -106,6 +112,13 @@ public class LevelManager : MonoBehaviour
         smackFillSprite.color = colourGradient.Evaluate(currentSmackLevel / maxSmackLevel);
         postProcessVol.weight = currentSmackLevel / maxSmackLevel;
 
+        if ((currentSmackLevel / maxSmackLevel) <= withdrawlThreshold) {
+
+            if (Time.time >= wBT) {
+                withdrawlText.SetActive(!withdrawlText.activeSelf);
+                wBT = Time.time + withdrawlBlinkSpeed;
+            }
+        } else if (withdrawlText.activeSelf) withdrawlText.SetActive(false);
 
         if ((currentSmackLevel / maxSmackLevel) <= 0.25f)
         {
