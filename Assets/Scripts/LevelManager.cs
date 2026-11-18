@@ -16,6 +16,8 @@ public class LevelManager : MonoBehaviour
     public TextMeshProUGUI smackCountText;
     public Gradient colourGradient;
     public Image smackFillSprite;
+    private bool hasDied;
+
 
     [Header("Suspicion Level Settings")]
     [SerializeField] private Slider suspicionSlider;
@@ -112,6 +114,7 @@ public class LevelManager : MonoBehaviour
         smackFillSprite.color = colourGradient.Evaluate(currentSmackLevel / maxSmackLevel);
         postProcessVol.weight = currentSmackLevel / maxSmackLevel;
 
+
         if ((currentSmackLevel / maxSmackLevel) <= withdrawlThreshold) {
 
             if (Time.time >= wBT) {
@@ -142,7 +145,10 @@ public class LevelManager : MonoBehaviour
         else if (currentSmackLevel <= 0f)
         {
             if (debug) Debug.Log("Withdrawal symptoms detected! Suck shit, you lose!");
-            //TODO: Implement game over logic here
+            if (!hasDied) {
+                ArmManager.instance.KYS();
+                hasDied = true;
+            }
         }
     }
 
@@ -224,5 +230,9 @@ public class LevelManager : MonoBehaviour
 
         // Ensure alpha is exactly 1 at the end
         blackScreen.color = new Color(0, 0, 0, 1);
+    }
+
+    public float GetSmackPercent() {
+        return currentSmackLevel / maxSmackLevel;
     }
 }

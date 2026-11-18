@@ -23,6 +23,13 @@ public class ArmManager : MonoBehaviour
     private bool isInjecting = false;
     private bool grabbing = false;
 
+    public static ArmManager instance;
+
+    private void Awake() {
+        if (instance != this) Destroy(instance);
+        instance = this;
+    }
+
     void Update()
     {
         if (!isInjecting && Input.GetKeyDown(injectKey) && levelManager.smackCount > 0 && !grabbing)
