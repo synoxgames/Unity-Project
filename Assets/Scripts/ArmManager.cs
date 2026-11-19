@@ -22,6 +22,7 @@ public class ArmManager : MonoBehaviour
     public CameraShake cameraShake;
     private bool isInjecting = false;
     private bool grabbing = false;
+    public bool isDead = false;
 
     public static ArmManager instance;
 
@@ -67,7 +68,9 @@ public class ArmManager : MonoBehaviour
 
     public void KYS()
     {
+        if (isDead) return;
         // sets arm sprite to kys, waits 2 seconds and shakes the image, plays a bang sound, screen goes black, scene resets
+        isDead = true;
         armImage.sprite = kysSprite;
         StartCoroutine(KYSCoroutine());
     }
@@ -84,6 +87,5 @@ public class ArmManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         // Reset the scene or perform any other action needed after KYS
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
-        StartCoroutine(levelManager.FadeOut()); // Fade in after reset
     }
 }

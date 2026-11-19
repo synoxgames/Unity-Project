@@ -54,6 +54,7 @@ public class RunAwayAI : MonoBehaviour
 
                 agent.SetDestination(hit.position);
             }
+            DragonChaseManager.instance.IncreaseChase(10 * Time.deltaTime);
         }
 
         // Detect if stuck
@@ -101,6 +102,7 @@ public class RunAwayAI : MonoBehaviour
         {
             agent.Warp(warpHit.position);
         }
+        DragonChaseManager.instance.IncreaseChase(25f);
     }
 
     private void PlayRandomSound() {

@@ -88,6 +88,8 @@ public class LevelManager : MonoBehaviour
             debug = !debug;
             debugUI.SetActive(debug);
         }
+
+        UpdateUI();
     }
 
     public void UpdateSuspicionLevel(float value)
@@ -167,19 +169,16 @@ public class LevelManager : MonoBehaviour
             return;
         }
         money += amount;
-        UpdateUI();
     }
 
     public void IncreaseSmackCount()
     {
         smackCount++;
-        UpdateUI();
     }
 
     public void DecreaseSmackCount(int amount = 1) {
         if ((smackCount - amount) <= 0) amount = smackCount;
         smackCount--;
-        UpdateUI();
     }
 
     public void SpawnFurniture()
