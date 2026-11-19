@@ -36,8 +36,9 @@ public class LevelManager : MonoBehaviour
     public bool debug = false;
 
     [Header("UI Elements - Warnings")]
-    public GameObject withdrawlText;
-    public float withdrawlThreshold = 0.1f;
+    public TextMeshProUGUI warningText;
+    public float withdrawlWarnThreshold = 0.1f;
+    public float overdoseWarnThreshold = 0.7f;
     public float withdrawlBlinkSpeed = 1f;
     float wBT = 0.0f;
 
@@ -115,13 +116,19 @@ public class LevelManager : MonoBehaviour
         postProcessVol.weight = currentSmackLevel / maxSmackLevel;
 
 
-        if ((currentSmackLevel / maxSmackLevel) <= withdrawlThreshold) {
-
+        if ((currentSmackLevel / maxSmackLevel) <= withdrawlWarnThreshold) {
+            warningText.text = "HEROIN REQUIRED ASAP";
             if (Time.time >= wBT) {
-                withdrawlText.SetActive(!withdrawlText.activeSelf);
+                warningText.gameObject.SetActive(!warningText.gameObject.activeSelf);
                 wBT = Time.time + withdrawlBlinkSpeed;
             }
-        } else if (withdrawlText.activeSelf) withdrawlText.SetActive(false);
+        } else if ((currentSmackLevel / maxSmackLevel) >= overdoseWarnThreshold) {
+            warningText.text = "OVERDOSE IMMINENT";
+            if (Time.time >= wBT) {
+                warningText.gameObject.SetActive(!warningText.gameObject.activeSelf);
+                wBT = Time.time + withdrawlBlinkSpeed;
+            }
+        } else if (warningText.gameObject.activeSelf) warningText.gameObject.SetActive(false);
 
         if ((currentSmackLevel / maxSmackLevel) <= 0.25f)
         {
@@ -160,21 +167,19 @@ public class LevelManager : MonoBehaviour
             return;
         }
         money += amount;
-        moneyText.text = "Money: $" + money.ToString();
-        if (money > 15)
-        {
-            smackText.enabled = true;
-        }
-        else
-        {
-            smackText.enabled = false;
-        }
+        UpdateUI();
     }
 
     public void IncreaseSmackCount()
     {
         smackCount++;
-        smackCountText.text = "X " + smackCount.ToString();
+        UpdateUI();
+    }
+
+    public void DecreaseSmackCount(int amount = 1) {
+        if ((smackCount - amount) <= 0) amount = smackCount;
+        smackCount--;
+        UpdateUI();
     }
 
     public void SpawnFurniture()
@@ -234,5 +239,17 @@ public class LevelManager : MonoBehaviour
 
     public float GetSmackPercent() {
         return currentSmackLevel / maxSmackLevel;
+    }
+
+    public void UpdateUI() {
+        smackCountText.text = smackCount.ToString();
+
+        moneyText.text = "Money: $" + money.ToString();
+
+        if (money > 15) {
+            smackText.enabled = true;
+        } else {
+            smackText.enabled = false;
+        }
     }
 }

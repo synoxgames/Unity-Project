@@ -35,8 +35,7 @@ public class ArmManager : MonoBehaviour
         if (!isInjecting && Input.GetKeyDown(injectKey) && levelManager.smackCount > 0 && !grabbing)
         {
             StartCoroutine(Inject());
-            levelManager.smackCount--; // Decrease smack count
-            levelManager.smackCountText.text = "X " + levelManager.smackCount.ToString(); // Update UI text
+            levelManager.DecreaseSmackCount();
         }
     }
 
