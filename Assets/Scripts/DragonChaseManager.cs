@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DragonChaseManager : MonoBehaviour {
+public class DragonChaseManager : LevelBase {
+
+    public Transform dragonTail;
+    public Vector3 startPosition;
+    public Vector3 endPosition;
 
     public float chaseDecreaseRate = 0.75f;
-    public float maxChase = 100f;
-    private float currentChase = 100f;
 
     public static DragonChaseManager instance;
 
@@ -16,22 +18,22 @@ public class DragonChaseManager : MonoBehaviour {
     }
 
     private void Start() {
-        currentChase = maxChase / 2;
+        currentLevel = levelMax / 2f;
     }
 
     private void Update() {
-        DecreaseChase(chaseDecreaseRate * Time.deltaTime);
+        DecreaseLevel(chaseDecreaseRate * Time.deltaTime);
+
+        dragonTail.localPosition = Vector3.Lerp(endPosition, startPosition, LevelPercent());
     }
 
-    public void IncreaseChase(float amount) {
-        currentChase += amount;
-        print("u");
+
+
+    public override void LevelMaxedOut() {
+        return;
     }
 
-    public void DecreaseChase(float amount) {
-        currentChase -= amount;
-
-        if (currentChase <= 0) ArmManager.instance.KYS();
+    public override void LevelReachedZero() {
+       ArmManager.instance.KYS();
     }
-
 }

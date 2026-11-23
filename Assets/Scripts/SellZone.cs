@@ -15,7 +15,7 @@ public class SellZone : MonoBehaviour
             if (fv != null)
             {
                 levelManager.UpdateMoney(fv.moneyValue);
-                levelManager.UpdateSuspicionLevel(fv.suspicionValue);
+                levelManager.suspicion.IncreaseLevel(fv.suspicionValue);
 
                 PlayerPickUpDrop.instance.DropObject();
 

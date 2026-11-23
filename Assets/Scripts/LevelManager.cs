@@ -18,12 +18,7 @@ public class LevelManager : MonoBehaviour
     public Image smackFillSprite;
     private bool hasDied;
 
-
-    [Header("Suspicion Level Settings")]
-    [SerializeField] private Slider suspicionSlider;
-    [SerializeField] private float maxSuspicionLevel = 100f;
-    [SerializeField] private float suspicionDecreaseRate = 1f; // Rate at which suspicion increases per second
-    private float currentSuspicionLevel = 0f;
+    public SuspicionHandler suspicion;
 
     [Header("Money Settings")]
     [SerializeField] private int money = 0;
@@ -55,8 +50,6 @@ public class LevelManager : MonoBehaviour
         smackSlider.value = startSmackLevel;
         smackCount = 0; // Reset smack count at the start
         smackCountText = GameObject.Find("SmackCountText").GetComponent<TextMeshProUGUI>();
-        currentSuspicionLevel = 0f;
-        suspicionSlider.value = 0f;
         moneyText.text = "Broke Ass";
         smackText.enabled = false; // Hide smack text initially
         debugUI.SetActive(debug); // Set initial state of debug UI
@@ -67,9 +60,6 @@ public class LevelManager : MonoBehaviour
     {
         // Decrease smack level over time
         UpdateSmackLevel(-smackDecreaseRate * Time.deltaTime);
-
-        // Decrease suspicion level over time
-        UpdateSuspicionLevel(-suspicionDecreaseRate * Time.deltaTime);
 
         if (Input.GetKeyDown(KeyCode.H))
         {
@@ -90,22 +80,6 @@ public class LevelManager : MonoBehaviour
         }
 
         UpdateUI();
-    }
-
-    public void UpdateSuspicionLevel(float value)
-    {
-        currentSuspicionLevel += value;
-        currentSuspicionLevel = Mathf.Clamp(currentSuspicionLevel, 0f, maxSuspicionLevel);
-        suspicionSlider.value = currentSuspicionLevel;
-
-        if (debug) Debug.Log("Suspicion Level: " + currentSuspicionLevel);
-
-        //Game Over Logic
-        if (currentSuspicionLevel >= maxSuspicionLevel)
-        {
-            if (debug) Debug.Log("Too sussy baka uwu! Suck shit, you lose!");
-            // TODO: Implement game over logic here
-        }
     }
 
     public void UpdateSmackLevel(float value)

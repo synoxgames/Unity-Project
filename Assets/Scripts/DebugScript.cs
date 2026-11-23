@@ -57,12 +57,12 @@ public class DebugScript : MonoBehaviour
 
     public void IncreaseSuspicion()
     {
-        levelManager.UpdateSuspicionLevel(10f);
+        levelManager.suspicion.IncreaseLevel(10f);
     }
 
     public void DecreaseSuspicion()
     {
-        levelManager.UpdateSuspicionLevel(-10f);
+        levelManager.suspicion.DecreaseLevel(10f);
     }
 
     public void IncreaseMoney()
