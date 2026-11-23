@@ -48,6 +48,7 @@ public class ArmManager : MonoBehaviour
         isInjecting = true;
         armImage.sprite = injectSprite;
         yield return new WaitForSeconds(injectDuration);
+        XPHandler.instance.AddXP(1f);
         armImage.sprite = idleSprite;
         isInjecting = false;
         levelManager.UpdateSmackLevel(20f); // Increase smack level by 10

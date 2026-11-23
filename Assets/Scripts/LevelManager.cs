@@ -117,7 +117,7 @@ public class LevelManager : MonoBehaviour
                 hallucinationsHolder.SetActive(false);
         }
 
-        if (debug) Debug.Log("Smack Level: " + currentSmackLevel);
+        if (debug) Debug.Log("Smack Level: " + currentSmackLevel.ToString("0.#"));
 
         //Game Over Logic
         if (currentSmackLevel > maxSmackLevel)

@@ -18,7 +18,7 @@ public class DragonChaseManager : LevelBase {
     }
 
     private void Start() {
-        currentLevel = levelMax / 2f;
+        currentLevel = levelMax;
     }
 
     private void Update() {

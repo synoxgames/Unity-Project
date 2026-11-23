@@ -16,7 +16,7 @@ public class SellZone : MonoBehaviour
             {
                 levelManager.UpdateMoney(fv.moneyValue);
                 levelManager.suspicion.IncreaseLevel(fv.suspicionValue);
-
+                XPHandler.instance.AddXP(fv.xpValue);
                 PlayerPickUpDrop.instance.DropObject();
 
                 Destroy(other.gameObject); // or setInactive if you want effects later
