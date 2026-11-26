@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MouseLook : MonoBehaviour
+public class MouseLook : MonoBehaviour, IEPausable
 {
     [Header("Floats")]
     public float mouseSensitivity = 100f;
@@ -66,5 +66,15 @@ public class MouseLook : MonoBehaviour
                 Cursor.visible = true;
                 break;
         }
+    }
+
+    public void OnPause() {
+        canUse = false;
+        ChangeMouseState(false);
+    }
+
+    public void OnUnPause() {
+        canUse = true;
+        ChangeMouseState(true);
     }
 }

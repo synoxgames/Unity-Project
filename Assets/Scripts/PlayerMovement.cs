@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IEPausable
 {
     [Header("Floats")]
     public float moveSpeed = 12f;
@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [Space]
     public float sprintInrease = 2f;
     public float sprintMax = 10f;
+    public float sprintRecoveryRate = 1.5f;
 
     [Header("Transform")]
     public Transform groundCheck;
@@ -85,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
             if (isSprinting)
                 sprintDuration += Time.deltaTime;
             else if (!isSprinting && sprintDuration > 0)
-                sprintDuration -= Time.deltaTime;
+                sprintDuration -= Time.deltaTime * sprintRecoveryRate;
 
             if (reachedRechargeFailSafe)
             {
@@ -251,6 +252,14 @@ public class PlayerMovement : MonoBehaviour
         body.velocity = pushDir * 3f; // tweak speed
     }
 
+    public void OnPause() {
+        canMove = false;
+        if (isSprinting) Sprint(false);
+    }
+
+    public void OnUnPause() {
+        canMove = true;
+    }
 }
 
 public enum SurfaceType

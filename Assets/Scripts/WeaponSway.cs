@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponSway : MonoBehaviour {
+public class WeaponSway : MonoBehaviour, IEPausable {
 
     [Header("Floats")]
     public float amount;
@@ -13,6 +13,7 @@ public class WeaponSway : MonoBehaviour {
     private Vector3 initialPosition;
     private Vector3 positionToUse;
 
+    bool isPaused;
     private static bool LockInPlace = true;
 
     Camera mainCam;
@@ -30,6 +31,7 @@ public class WeaponSway : MonoBehaviour {
 
     private void Update()
     {
+        if (isPaused) return;
         float x = -Input.GetAxis("Mouse X") * amount;
         float y = - Input.GetAxis("Mouse Y") * amount;
         x = Mathf.Clamp(x, -maximumAmount, maximumAmount);
@@ -47,4 +49,12 @@ public class WeaponSway : MonoBehaviour {
     }
 
     public static void SetLockState(bool state) { LockInPlace = state; }
+
+    public void OnPause() {
+        isPaused = true;
+    }
+
+    public void OnUnPause() {
+        isPaused = false;
+    }
 }

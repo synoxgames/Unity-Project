@@ -43,13 +43,13 @@ public class XPHandler : MonoBehaviour
             if (!isLevellingUp) StartCoroutine(LevelUpUI());
         }
 
-
         UpdateSlider();
     }
 
     public void LevelUp() {
         currentLevel++;
-        nextLevelXP = Mathf.Pow(currentLevel, LEVEL_MULTIPLIER);
+        nextLevelXP = Mathf.Pow(currentLevel, LEVEL_MULTIPLIER) + 5f;
+        SkillTreeManager.instance.AddPerkPoint(1);
         UpdateSlider();
     }
 
@@ -57,7 +57,7 @@ public class XPHandler : MonoBehaviour
         isLevellingUp = true;
         audioSource.PlayOneShot(levelUpAudio);
         levelUpText.SetActive(true);
-        yield return new WaitForSeconds(levelUpAudio.length);
+        yield return new WaitForSeconds(6.648f);
         levelUpText.SetActive(false);
         isLevellingUp = false;
     }

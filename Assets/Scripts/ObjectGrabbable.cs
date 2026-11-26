@@ -26,6 +26,8 @@ public class ObjectGrabbable : MonoBehaviour
         objectRigidbody.useGravity = false;
         // freezes the rotation of the object
         // objectRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+        //if (Random.value <= 0.25f) 
+            AudioManager.current.Play("Pickup");
     }
 
     public void Drop()

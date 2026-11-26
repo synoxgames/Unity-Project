@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DragonChaseManager : LevelBase {
+public class DragonChaseManager : LevelBase, IEUpgradable {
 
     public Transform dragonTail;
     public Vector3 startPosition;
     public Vector3 endPosition;
 
+    public WarningHandler warningText;
+    public float warningThreshold = 0.25f;
     public float chaseDecreaseRate = 0.75f;
 
     public static DragonChaseManager instance;
@@ -22,9 +24,13 @@ public class DragonChaseManager : LevelBase {
     }
 
     private void Update() {
-        DecreaseLevel(chaseDecreaseRate * Time.deltaTime);
+        if (isPaused) return;
 
+        DecreaseLevel(chaseDecreaseRate * Time.deltaTime);
         dragonTail.localPosition = Vector3.Lerp(endPosition, startPosition, LevelPercent());
+
+        if (LevelPercent() <= warningThreshold) warningText.StartWarning("Chase Me", 0.1f);
+        else warningText.StopWarning();
     }
 
 
@@ -36,4 +42,5 @@ public class DragonChaseManager : LevelBase {
     public override void LevelReachedZero() {
        ArmManager.instance.KYS();
     }
+
 }

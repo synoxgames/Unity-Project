@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerPickUpDrop : MonoBehaviour
+public class PlayerPickUpDrop : MonoBehaviour, IEPausable
 {
     [SerializeField] private Transform playerCameraTransform;
 
@@ -10,6 +10,7 @@ public class PlayerPickUpDrop : MonoBehaviour
     [SerializeField] public ArmManager armManager;
     [SerializeField] public bool debug = false;
     private ObjectGrabbable objectGrabbable;
+    bool isPaused = false;
 
     public static PlayerPickUpDrop instance;
 
@@ -21,7 +22,7 @@ public class PlayerPickUpDrop : MonoBehaviour
 
 
     void Update() {
-        if (Input.GetKeyDown(KeyCode.E)) {
+        if (Input.GetKeyDown(KeyCode.E) && !isPaused) {
             if (objectGrabbable == null) {
                 // carrying fuck all, try n grab
                 PickupObject();
@@ -52,5 +53,13 @@ public class PlayerPickUpDrop : MonoBehaviour
         objectGrabbable.Drop();
         objectGrabbable = null;
         armManager.SetGrabbing(false);
+    }
+
+    public void OnPause() {
+        isPaused = true;
+    }
+
+    public void OnUnPause() {
+        isPaused = false;
     }
 }

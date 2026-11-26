@@ -31,11 +31,10 @@ public class LevelManager : MonoBehaviour
     public bool debug = false;
 
     [Header("UI Elements - Warnings")]
-    public TextMeshProUGUI warningText;
+    public WarningHandler smackWarningHandler;
     public float withdrawlWarnThreshold = 0.1f;
     public float overdoseWarnThreshold = 0.7f;
-    public float withdrawlBlinkSpeed = 1f;
-    float wBT = 0.0f;
+    public float smackBlinkSpeed = 0.33f;
 
     [Header("Other")]
     public GameObject hallucinationsHolder;
@@ -93,18 +92,10 @@ public class LevelManager : MonoBehaviour
 
 
         if ((currentSmackLevel / maxSmackLevel) <= withdrawlWarnThreshold) {
-            warningText.text = "HEROIN REQUIRED ASAP";
-            if (Time.time >= wBT) {
-                warningText.gameObject.SetActive(!warningText.gameObject.activeSelf);
-                wBT = Time.time + withdrawlBlinkSpeed;
-            }
+            smackWarningHandler.StartWarning("HEROIN REQUIRED ASAP", smackBlinkSpeed);
         } else if ((currentSmackLevel / maxSmackLevel) >= overdoseWarnThreshold) {
-            warningText.text = "OVERDOSE IMMINENT";
-            if (Time.time >= wBT) {
-                warningText.gameObject.SetActive(!warningText.gameObject.activeSelf);
-                wBT = Time.time + withdrawlBlinkSpeed;
-            }
-        } else if (warningText.gameObject.activeSelf) warningText.gameObject.SetActive(false);
+            smackWarningHandler.StartWarning("NEARING OVERDOSE!", smackBlinkSpeed);
+        } else smackWarningHandler.StopWarning();
 
         if ((currentSmackLevel / maxSmackLevel) <= 0.25f)
         {

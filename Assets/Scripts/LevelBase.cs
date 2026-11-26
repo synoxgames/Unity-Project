@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class LevelBase : MonoBehaviour {
+public abstract class LevelBase : MonoBehaviour, IEPausable {
 
     public float levelMax = 100f;
     protected float currentLevel = 50f;
+    protected bool isPaused = false;
 
     public virtual void IncreaseLevel(float amount) {
         currentLevel += amount;
@@ -29,5 +30,13 @@ public abstract class LevelBase : MonoBehaviour {
 
     public float LevelPercent() {
         return currentLevel / levelMax;
+    }
+
+    public void OnPause() {
+        isPaused = true;
+    }
+
+    public void OnUnPause() {
+        isPaused = false;
     }
 }

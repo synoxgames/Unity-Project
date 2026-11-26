@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class RunAwayAI : MonoBehaviour
+public class RunAwayAI : MonoBehaviour, IEPausable
 {
     public Transform player;
     [Header("Flee Settings")]
@@ -19,6 +19,7 @@ public class RunAwayAI : MonoBehaviour
     public float audioCooldown = 1.5f;
     private AudioSource audPlayer;
     float audioTimer = 0.0f;
+    bool isPaused = false;
 
     void Start()
     {
@@ -31,6 +32,7 @@ public class RunAwayAI : MonoBehaviour
 
     void Update()
     {
+        if (isPaused) return;
         Vector3 dir = transform.position - player.position;
         dir.y = 0f; // Keep the flee direction level with the agent
 
@@ -110,5 +112,15 @@ public class RunAwayAI : MonoBehaviour
         AudioClip clip = tauntSounds[Random.Range(0, tauntSounds.Length)];
         audPlayer.PlayOneShot(clip);
         audioTimer = Time.time + audioCooldown;
+    }
+
+    public void OnPause() {
+        agent.isStopped = true;
+        isPaused = true;
+    }
+
+    public void OnUnPause() {
+        agent.isStopped = false;
+        isPaused = false;
     }
 }

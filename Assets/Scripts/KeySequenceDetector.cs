@@ -1,16 +1,19 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class KeySequenceDetector : MonoBehaviour
+public class KeySequenceDetector : MonoBehaviour, IEPausable
 {
     public float inputTimeout = 3f; // seconds to complete the sequence
     public ArmManager armManager; // Reference to the ArmManager to access the kys method
     private List<KeyCode> kysSequence = new List<KeyCode> { KeyCode.K, KeyCode.Y, KeyCode.S };
     private int currentIndex = 0;
     private float timer = 0f;
+    bool isPaused = false;
 
     void Update()
     {
+        if (isPaused) return;
+
         if (currentIndex > 0)
         {
             timer += Time.deltaTime;
@@ -51,5 +54,13 @@ public class KeySequenceDetector : MonoBehaviour
     {
         Debug.Log("KYS sequence entered, triggering death!");
         armManager.KYS();
+    }
+
+    public void OnPause() {
+        isPaused = true;
+    }
+
+    public void OnUnPause() {
+        isPaused = false;
     }
 }

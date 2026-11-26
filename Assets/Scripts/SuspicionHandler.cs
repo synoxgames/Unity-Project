@@ -16,6 +16,7 @@ public class SuspicionHandler : LevelBase
 
     // Update is called once per frame
     void Update() {
+        if (isPaused) return;
         DecreaseLevel(decreaseRate * Time.deltaTime);
         colourImage.color = Color.Lerp(Color.clear, Color.white, LevelPercent());
     }
